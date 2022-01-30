@@ -35,12 +35,12 @@ void InitMyChar(void)
 	gMC.direct = 2;
 
 	gMC.view.back = 8 * 0x200;
-	gMC.view.top = 8 * 0x200;
+	gMC.view.top = 16 * 0x200;
 	gMC.view.front = 8 * 0x200;
 	gMC.view.bottom = 8 * 0x200;
 
 	gMC.hit.back = 5 * 0x200;
-	gMC.hit.top = 8 * 0x200;
+	gMC.hit.top = 14 * 0x200;
 	gMC.hit.front = 5 * 0x200;
 	gMC.hit.bottom = 8 * 0x200;
 
@@ -73,33 +73,33 @@ void InitMyChar(void)
 void AnimationMyChar(BOOL bKey)
 {
 	RECT rcLeft[12] = {
-		{0, 0, 16, 16},
-		{16, 0, 32, 16},
-		{0, 0, 16, 16},
-		{32, 0, 48, 16},
-		{0, 0, 16, 16},
-		{48, 0, 64, 16},
-		{64, 0, 80, 16},
-		{48, 0, 64, 16},
-		{80, 0, 96, 16},
-		{48, 0, 64, 16},
-		{96, 0, 112, 16},
-		{112, 0, 128, 16},
+		{0, 0, 16, 24},
+		{16, 0, 32, 24},
+		{0, 0, 16, 24},
+		{32, 0, 48, 24},
+		{0, 0, 16, 24},
+		{48, 0, 64, 24},
+		{64, 0, 80, 24},
+		{48, 0, 64, 24},
+		{80, 0, 96, 24},
+		{48, 0, 64, 24},
+		{96, 0, 112, 24},
+		{112, 0, 128, 24},
 	};
 
 	RECT rcRight[12] = {
-		{0, 16, 16, 32},
-		{16, 16, 32, 32},
-		{0, 16, 16, 32},
-		{32, 16, 48, 32},
-		{0, 16, 16, 32},
-		{48, 16, 64, 32},
-		{64, 16, 80, 32},
-		{48, 16, 64, 32},
-		{80, 16, 96, 32},
-		{48, 16, 64, 32},
-		{96, 16, 112, 32},
-		{112, 16, 128, 32},
+		{0, 24, 16, 48},
+		{16, 24, 32, 48},
+		{0, 24, 16, 48},
+		{32, 24, 48, 48},
+		{0, 24, 16, 48},
+		{48, 24, 64, 48},
+		{64, 24, 80, 48},
+		{48, 24, 64, 48},
+		{80, 24, 96, 48},
+		{48, 24, 64, 48},
+		{96, 24, 112, 48},
+		{112, 24, 128, 48},
 	};
 
 	if (gMC.cond & 2)
@@ -231,7 +231,7 @@ void PutMyChar(int fx, int fy)
 		PutBitmap3(
 			&grcGame,
 			SubpixelToScreenCoord(gMC.x - gMC.view.front) - SubpixelToScreenCoord(fx) - PixelToScreenCoord(8),
-			SubpixelToScreenCoord(gMC.y - gMC.view.top) - SubpixelToScreenCoord(fy) + PixelToScreenCoord(arms_offset_y),
+			SubpixelToScreenCoord(gMC.y - gMC.view.top) - SubpixelToScreenCoord(fy) + PixelToScreenCoord(arms_offset_y + 7),
 			&gMC.rect_arms,
 			SURFACE_ID_ARMS);
 	else
