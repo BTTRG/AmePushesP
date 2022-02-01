@@ -64,6 +64,9 @@ static unsigned long nod_color;
 
 unsigned int gMIMCurrentNum = 0;
 
+int frame_cnt = 0;
+int frame_progress = 0;
+
 // Initialize and end tsc
 BOOL InitTextScript2(void)
 {
@@ -598,10 +601,6 @@ int TextScriptProc(void)
 	char c[3];
 	char str[72];
 	int w, x, y, z;
-
-	int frame;
-    int hcount;
-    int fcount;
 
 	BOOL bExit;
 
@@ -1424,39 +1423,10 @@ int TextScriptProc(void)
 					}
 					else if (IS_COMMAND('V','I','D'))
 					{
+						gTS.p_read += 4;
 						gTS.mode = 8;
+						gTS.wait = 0;
 						bExit = TRUE;
-						//PutVideo();
-						    //RECT rcClient = {0, 0, WINDOW_WIDTH, WINDOW_HEIGHT};
-    //RECT rect = {0, 0, 320, 240};
-
-    /*int frame;
-    int hcount;
-    int fcount;
-    // I could just use % and a frame counter but idk how it works
-    hcount++;
-    frame++;
-    fcount++;
-    
-    if (fcount > 4) // Display a video frame every 1/4 of a game frame (cause 60 * 4 = 15 fps)
-        rect.left += 320;
-        rect.right += 320;
-		fcount = 0;
-        hcount++;
-
-    if (hcount > 16) // If we're on the last frame on the horizontal row, move down
-        rect.top += 240;
-        rect.bottom += 240;
-        hcount = 0;
-
-    if (frame < 481)
-    {*/
-        //PutBitmap3(&rcClient, PixelToScreenCoord(0), PixelToScreenCoord(0), &rect, SURFACE_ID_VIDEO);
-    /*}
-    else
-    {
-        return; // Remove if the video is done
-    }*/
 					}
 					else
 					{
@@ -1670,11 +1640,39 @@ int TextScriptProc(void)
 			}
 			break;
 		case 8:
-			int off;
+			// ty JakeV ❤️
     		RECT rcClient = {0, 0, WINDOW_WIDTH, WINDOW_HEIGHT};
-    		RECT rect = {0, 0 + off, 320, 240};
-			off++;
-        	PutBitmap3(&rcClient, PixelToScreenCoord(0), PixelToScreenCoord(0), &rect, SURFACE_ID_VIDEO);
+    		RECT rect = {0, 0, 320, 240};
+
+			if (frame_progress < 480)
+			{
+				frame_cnt++;
+				//cout << frame_progress;
+				if (frame_cnt % 4 == 0){
+					frame_progress++;
+				}
+				int horz_progress = frame_progress%16;
+				int vert_progress = frame_progress/16;
+				rect.left = 320 * horz_progress;
+				rect.top = 240 * vert_progress;
+
+				rect.right = rect.left + 320;
+				rect.bottom = rect.top + 240;
+
+				PutBitmap3(&rcClient, PixelToScreenCoord(0), PixelToScreenCoord(0), &rect, SURFACE_ID_VIDEO);
+
+				if (frame_cnt == 4) {
+					PlaySoundObject(118, SOUND_MODE_PLAY);
+				}
+			}
+			else {
+				//cout << "I'M OUTTA HERE";
+				gTS.mode = 1;
+				gTS.wait_beam = 0;
+				frame_cnt = 0;
+				frame_progress = 0;
+				break;
+			}
 	}
 
 	if (gTS.mode == 0)

@@ -116,6 +116,7 @@ static const struct
 	{115, "PixTone/115.pxt", SOUND_TYPE_PIXTONE},
 	{116, "PixTone/116.pxt", SOUND_TYPE_PIXTONE},
 	{117, "PixTone/117.pxt", SOUND_TYPE_PIXTONE},
+	{118, "Video/Video.ogg", SOUND_TYPE_OTHER  }, // Video audio
 	{150, "PixTone/150.pxt", SOUND_TYPE_PIXTONE},
 	{151, "PixTone/151.pxt", SOUND_TYPE_PIXTONE},
 	{152, "PixTone/152.pxt", SOUND_TYPE_PIXTONE},
@@ -239,7 +240,7 @@ BOOL LoadGenericData(void)
 		bError = TRUE;
 	if (!MakeSurface_File("Resource/BITMAP/Credit01", SURFACE_ID_CREDITS_IMAGE))
 		bError = TRUE;
-	if (!MakeSurface_File("Video", SURFACE_ID_VIDEO))
+	if (!MakeSurface_File("Video/Video", SURFACE_ID_VIDEO))
 		bError = TRUE;
 
 	if (bError)
