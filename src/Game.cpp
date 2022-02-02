@@ -115,39 +115,7 @@ void PutNumber4(int x, int y, int value, BOOL bZero)
 		++offset;
 	}
 }
-void PutVideo()
-{
-    RECT rcClient = {0, 0, WINDOW_WIDTH, WINDOW_HEIGHT};
-    RECT rect = {0, 0, 320, 240};
 
-    /*int frame;
-    int hcount;
-    int fcount;
-    // I could just use % and a frame counter but idk how it works
-    hcount++;
-    frame++;
-    fcount++;
-    
-    if (fcount > 4) // Display a video frame every 1/4 of a game frame (cause 60 * 4 = 15 fps)
-        rect.left += 320;
-        rect.right += 320;
-		fcount = 0;
-        hcount++;
-
-    if (hcount > 16) // If we're on the last frame on the horizontal row, move down
-        rect.top += 240;
-        rect.bottom += 240;
-        hcount = 0;
-
-    if (frame < 481)
-    {*/
-        PutBitmap3(&rcClient, PixelToScreenCoord(0), PixelToScreenCoord(0), &rect, SURFACE_ID_VIDEO);
-    /*}
-    else
-    {
-        return; // Remove if the video is done
-    }*/
-}
 // Draws black bars to cover the out-of-bounds parts of the screen
 static void PutBlackBars(int fx, int fy)
 {
@@ -349,10 +317,10 @@ static int ModeTitle(void)
 
 	// Character rects
 	RECT rcMyChar[4] = {
-		{0, 16, 16, 32},
-		{16, 16, 32, 32},
-		{0, 16, 16, 32},
-		{32, 16, 48, 32},
+		{0, 24, 16, 48},
+		{16, 24, 32, 48},
+		{0, 24, 16, 48},
+		{32, 24, 48, 48},
 	};
 
 	RECT rcCurly[4] = {
@@ -558,9 +526,9 @@ static int ModeTitle(void)
 		}
 
 		if (!bContinue)
-			char_y = (WINDOW_HEIGHT / 2) + 7;
+			char_y = (WINDOW_HEIGHT / 2) + 7 - 5;
 		else
-			char_y = (WINDOW_HEIGHT / 2) + 27;
+			char_y = (WINDOW_HEIGHT / 2) + 27 - 5;
 
 		// Pixel being redundant
 		if (!bContinue)
