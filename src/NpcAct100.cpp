@@ -957,12 +957,13 @@ void ActNpc113(NPCHAR *npc)
 {
 	RECT rcLeft[2] = {
 		{0, 128, 24, 160},
-		{24, 128, 48, 160},
+		{24, 128, 48, 160}
 	};
 
-	/*RECT rcRight[0] = {
-
-	};*/
+	RECT rcRight[2] = {
+		{0, 160, 24, 192},
+		{24, 160, 48, 192}
+	};
 
 	switch (npc->act_no)
 	{
@@ -994,10 +995,10 @@ void ActNpc113(NPCHAR *npc)
 	npc->ym += 0x40;
 	npc->y += npc->ym;
 
-	//if (npc->direct == 0)
+	if (npc->direct == 0)
 		npc->rect = rcLeft[npc->ani_no];
-	//else
-		//npc->rect = rcRight[npc->ani_no];
+	else
+		npc->rect = rcRight[npc->ani_no];
 
 }
 
