@@ -46,11 +46,12 @@ CONFIG_BINDING bindings[BINDING_TOTAL];
 
 static BOOL bActive = TRUE;
 static BOOL bFPS = FALSE;
+BOOL bKids = FALSE; // Kids mode bruhh
 
 #ifdef JAPANESE
 static const char* const lpWindowName = "洞窟物語";	// "Cave Story"
 #else
-static const char* const lpWindowName = "Cave Story ~ Doukutsu Monogatari";
+static const char* const lpWindowName = "🅿️";
 #endif
 
 static void DragAndDropCallback(const char *path)
@@ -211,8 +212,11 @@ int main(int argc, char *argv[])
 		FreeBitmap(cursor_rgba_pixels);
 	}
 
-	if (IsKeyFile("fps"))
+	if (!IsKeyFile("fps"))
 		bFPS = TRUE;
+
+	if (IsKeyFile("kid"))
+		bKids = TRUE;
 
 	// Set rects
 	RECT rcLoading = {0, 0, 64, 8};

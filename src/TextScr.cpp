@@ -1428,6 +1428,15 @@ int TextScriptProc(void)
 						gTS.wait = 0;
 						bExit = TRUE;
 					}
+					else if (IS_COMMAND('S','U','S'))
+					{
+						gTS.next_event = GetTextScriptNo(gTS.p_read + 4);
+						gTS.p_read += 8;
+						gTS.mode = 9;
+						gTS.wait = 0;
+						gTS.select = 0;
+						bExit = TRUE;
+					}
 					else
 					{
 						char str_0[0x40];
@@ -1595,6 +1604,19 @@ int TextScriptProc(void)
 			gTS.wait_beam = 0;
 			break;
 
+		case 9:
+			// I probably don't need a whole ass gTS.mode for this but i'm lazyy
+			if (bKids)
+			{
+				JumpTextScript(gTS.next_event);
+			}
+			else
+			{
+				gTS.mode = 1;
+				gTS.wait_beam = 0;
+			}
+			break;
+
 		case 7: // WAS
 			if ((gMC.flag & 8) == 0)
 				break;
@@ -1665,8 +1687,10 @@ int TextScriptProc(void)
 					PlaySoundObject(118, SOUND_MODE_PLAY);
 				}
 			}
-			else {
+
+			if (frame_progress >= 480 || gKeyTrg & gKeyArms) {
 				//cout << "I'M OUTTA HERE";
+				CutNoise();
 				gTS.mode = 1;
 				gTS.wait_beam = 0;
 				frame_cnt = 0;

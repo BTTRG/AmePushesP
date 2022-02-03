@@ -1029,6 +1029,7 @@ void CutNoise(void)
 	PlaySoundObject(40, SOUND_MODE_STOP);
 	PlaySoundObject(41, SOUND_MODE_STOP);
 	PlaySoundObject(58, SOUND_MODE_STOP);
+	PlaySoundObject(118, SOUND_MODE_STOP);
 }
 
 void ResetNoise(void)

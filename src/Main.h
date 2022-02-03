@@ -19,6 +19,7 @@ extern std::string gDataPath;
 
 extern BOOL bFullscreen;
 extern BOOL gbUseJoystick;
+extern BOOL bKids;
 
 extern int gJoystickButtonTable[8];
 

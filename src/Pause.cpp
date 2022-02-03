@@ -67,10 +67,10 @@ typedef struct OptionsMenu
 static BOOL restart_required;
 
 static const RECT rcMyChar[4] = {
-	{0, 16, 16, 32},
-	{16, 16, 32, 32},
-	{0, 16, 16, 32},
-	{32, 16, 48, 32},
+	{0, 24, 16, 48},
+	{16, 24, 32, 48},
+	{0, 24, 16, 48},
+	{32, 24, 48, 48}
 };
 
 static const char* GetKeyName(int key)

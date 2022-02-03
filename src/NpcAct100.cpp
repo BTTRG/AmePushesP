@@ -952,28 +952,17 @@ void ActNpc112(NPCHAR *npc)
 	}
 }
 
-// Professor Booster
+// Sasuke
 void ActNpc113(NPCHAR *npc)
 {
-	RECT rcLeft[7] = {
-		{224, 0, 240, 16},
-		{240, 0, 256, 16},
-		{256, 0, 272, 16},
-		{224, 0, 240, 16},
-		{272, 0, 288, 16},
-		{224, 0, 240, 16},
-		{288, 0, 304, 16},
+	RECT rcLeft[2] = {
+		{0, 128, 24, 160},
+		{24, 128, 48, 160},
 	};
 
-	RECT rcRight[7] = {
-		{224, 16, 240, 32},
-		{240, 16, 256, 32},
-		{256, 16, 272, 32},
-		{224, 16, 240, 32},
-		{272, 16, 288, 32},
-		{224, 16, 240, 32},
-		{288, 16, 304, 32},
-	};
+	/*RECT rcRight[0] = {
+
+	};*/
 
 	switch (npc->act_no)
 	{
@@ -983,38 +972,16 @@ void ActNpc113(NPCHAR *npc)
 			npc->ani_wait = 0;
 			// Fallthrough
 		case 1:
-			if (Random(0, 120) == 10)
-			{
-				npc->act_no = 2;
-				npc->act_wait = 0;
-				npc->ani_no = 1;
-			}
-
 			break;
-
-		case 2:
-			if (++npc->act_wait > 8)
-			{
-				npc->act_no = 1;
-				npc->ani_no = 0;
-			}
-
-			break;
-
-		case 3:
-			npc->act_no = 4;
-			npc->ani_no = 2;
-			npc->ani_wait = 0;
-			// Fallthrough
-		case 4:
+		case 69:
 			if (++npc->ani_wait > 4)
 			{
 				npc->ani_wait = 0;
 				++npc->ani_no;
 			}
 
-			if (npc->ani_no > 5)
-				npc->ani_no = 2;
+			if (npc->ani_no > 1)
+				npc->ani_no = 0;
 
 			if (npc->direct == 0)
 				npc->x -= 1 * 0x200;
@@ -1022,65 +989,16 @@ void ActNpc113(NPCHAR *npc)
 				npc->x += 1 * 0x200;
 
 			break;
-
-		case 5:
-			npc->ani_no = 6;
-			break;
-
-		case 30:
-			npc->act_no = 31;
-			npc->ani_no = 0;
-			npc->ani_wait = 0;
-			npc->hit.bottom = 16 * 0x200;
-			npc->x -= 16 * 0x200;
-			npc->y += 8 * 0x200;
-			PlaySoundObject(29, SOUND_MODE_PLAY);
-			// Fallthrough
-		case 31:
-			if (++npc->act_wait == 64)
-			{
-				npc->act_no = 32;
-				npc->act_wait = 0;
-			}
-
-			break;
-
-		case 32:
-			if (++npc->act_wait > 20)
-			{
-				npc->act_no = 33;
-				npc->ani_no = 1;
-				npc->hit.bottom = 8 * 0x200;
-			}
-
-			break;
-
-		case 33:
-			if (npc->flag & 8)
-			{
-				npc->act_no = 34;
-				npc->act_wait = 0;
-				npc->ani_no = 0;
-			}
-
-			break;
 	}
 
 	npc->ym += 0x40;
 	npc->y += npc->ym;
 
-	if (npc->direct == 0)
+	//if (npc->direct == 0)
 		npc->rect = rcLeft[npc->ani_no];
-	else
-		npc->rect = rcRight[npc->ani_no];
+	//else
+		//npc->rect = rcRight[npc->ani_no];
 
-	if (npc->act_no == 31)
-	{
-		npc->rect.bottom = npc->rect.top + (npc->act_wait / 4);
-
-		if (npc->act_wait / 2 % 2)
-			++npc->rect.left;
-	}
 }
 
 // Press
