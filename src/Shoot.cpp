@@ -129,13 +129,13 @@ void ShootBullet_PoleStar(int level)
 			{
 				if (gMC.direct == 0)
 				{
-					SetBullet(bul_no, gMC.x - (1 * 0x200), gMC.y - (8 * 0x200), 1);
-					SetCaret(gMC.x - (1 * 0x200), gMC.y - (8 * 0x200), CARET_SHOOT, DIR_LEFT);
+					SetBullet(bul_no, gMC.x - (1 * 0x200), gMC.y - (16 * 0x200), 1);
+					SetCaret(gMC.x - (1 * 0x200), gMC.y - (16 * 0x200), CARET_SHOOT, DIR_LEFT);
 				}
 				else
 				{
-					SetBullet(bul_no, gMC.x + (1 * 0x200), gMC.y - (8 * 0x200), 1);
-					SetCaret(gMC.x + (1 * 0x200), gMC.y - (8 * 0x200), CARET_SHOOT, DIR_LEFT);
+					SetBullet(bul_no, gMC.x + (1 * 0x200), gMC.y - (16 * 0x200), 1);
+					SetCaret(gMC.x + (1 * 0x200), gMC.y - (16 * 0x200), CARET_SHOOT, DIR_LEFT);
 				}
 			}
 			else if (gMC.down)

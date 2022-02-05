@@ -230,15 +230,15 @@ void PutMyChar(int fx, int fy)
 	if (gMC.direct == 0)
 		PutBitmap3(
 			&grcGame,
-			SubpixelToScreenCoord(gMC.x - gMC.view.front) - SubpixelToScreenCoord(fx) - PixelToScreenCoord(8),
+			SubpixelToScreenCoord(gMC.x - gMC.view.front) - SubpixelToScreenCoord(fx) - PixelToScreenCoord(9),
 			SubpixelToScreenCoord(gMC.y - gMC.view.top) - SubpixelToScreenCoord(fy) + PixelToScreenCoord(arms_offset_y + 7),
 			&gMC.rect_arms,
 			SURFACE_ID_ARMS);
 	else
 		PutBitmap3(
 			&grcGame,
-			SubpixelToScreenCoord(gMC.x - gMC.view.front) - SubpixelToScreenCoord(fx),
-			SubpixelToScreenCoord(gMC.y - gMC.view.top) - SubpixelToScreenCoord(fy) + PixelToScreenCoord(arms_offset_y),
+			SubpixelToScreenCoord(gMC.x - gMC.view.front) - SubpixelToScreenCoord(fx) + PixelToScreenCoord(1),
+			SubpixelToScreenCoord(gMC.y - gMC.view.top) - SubpixelToScreenCoord(fy) + PixelToScreenCoord(arms_offset_y + 7),
 			&gMC.rect_arms,
 			SURFACE_ID_ARMS);
 
