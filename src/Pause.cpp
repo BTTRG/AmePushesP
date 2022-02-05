@@ -436,7 +436,7 @@ static int EnterOptionsMenu(OptionsMenu *options_menu, size_t selected_option)
 
 			// Draw Quote next to the selected option
 			if (i == selected_option)
-				PutBitmap3(&grcFull, PixelToScreenCoord(x - 20), PixelToScreenCoord(y - 8), &rcMyChar[anime / 10 % 4], SURFACE_ID_MY_CHAR);
+				PutBitmap3(&grcFull, PixelToScreenCoord(x - 20), PixelToScreenCoord(y - 13), &rcMyChar[anime / 10 % 4], SURFACE_ID_MY_CHAR);
 
 			unsigned long option_colour = options_menu->options[i].disabled ? RGB(0x80, 0x80, 0x80) : RGB(0xFF, 0xFF, 0xFF);
 
