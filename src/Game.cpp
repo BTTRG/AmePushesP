@@ -188,7 +188,7 @@ static int ModeOpening(void)
 	InitFlash();
 	InitBossLife();
 	ChangeMusic(MUS_SILENCE);
-	TransferStage(72, 100, 3, 3);
+	TransferStage(4, 200, 3, 3);
 	SetFrameTargetMyChar(16);
 	SetFadeMask();
 
@@ -240,7 +240,7 @@ static int ModeOpening(void)
 		}
 
 		// Skip intro if OK is pressed
-		//if (gKey & gKeyOk)
+		if (gKey & gKeyOk)
 			break;
 
 		// Update everything

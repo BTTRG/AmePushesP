@@ -79,3 +79,5 @@
 
 # Exclude converted resource files
 /src/Resource
+
+/win-build

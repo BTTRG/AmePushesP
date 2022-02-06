@@ -639,13 +639,13 @@ void ShootBullet_Bubblin1(void)
 		{
 			if (gMC.direct == 0)
 			{
-				SetBullet(19, gMC.x - (1 * 0x200), gMC.y - (2 * 0x200), 1);
-				SetCaret(gMC.x - (1 * 0x200), gMC.y - (2 * 0x200), CARET_SHOOT, DIR_LEFT);
+				SetBullet(19, gMC.x - (1 * 0x200), gMC.y - (10 * 0x200), 1);
+				SetCaret(gMC.x - (1 * 0x200), gMC.y - (10 * 0x200), CARET_SHOOT, DIR_LEFT);
 			}
 			else
 			{
-				SetBullet(19, gMC.x + (1 * 0x200), gMC.y - (2 * 0x200), 1);
-				SetCaret(gMC.x + (1 * 0x200), gMC.y - (2 * 0x200), CARET_SHOOT, DIR_LEFT);
+				SetBullet(19, gMC.x + (1 * 0x200), gMC.y - (10 * 0x200), 1);
+				SetCaret(gMC.x + (1 * 0x200), gMC.y - (10 * 0x200), CARET_SHOOT, DIR_LEFT);
 			}
 		}
 		else if (gMC.down)
