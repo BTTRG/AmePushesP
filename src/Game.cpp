@@ -188,7 +188,7 @@ static int ModeOpening(void)
 	InitFlash();
 	InitBossLife();
 	ChangeMusic(MUS_SILENCE);
-	TransferStage(4, 200, 3, 3);
+	TransferStage(3, 200, 3, 3);
 	SetFrameTargetMyChar(16);
 	SetFadeMask();
 
