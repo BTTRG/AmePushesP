@@ -23,6 +23,7 @@
 #include "NpChar.h"
 #include "Sound.h"
 #include "Triangle.h"
+#include "TextScr.h"
 
 // Ballos
 void ActNpc340(NPCHAR *npc)
@@ -1893,38 +1894,48 @@ void ActNpc356(NPCHAR *npc)
 	npc->rect = rcRight[npc->ani_no];
 }
 
-// Puppy ghost
+// Ame (dead)
 void ActNpc357(NPCHAR *npc)
 {
-	RECT rc = {224, 136, 240, 152};
+	RECT rcLeft[2] = {
+		{176, 0, 192, 24},
+		{200, 0, 224, 24}
+	};
+
+	RECT rcRight[2] = {
+		{176, 24, 192, 48},
+		{200, 24, 224, 48}
+	};
 
 	switch (npc->act_no)
 	{
 		case 0:
-			npc->rect = rc;
-			++npc->act_wait;
-			break;
-
-		case 10:
-			npc->act_wait = 0;
-			npc->act_no = 11;
-			PlaySoundObject(29, SOUND_MODE_PLAY);
-			// Fallthrough
-		case 11:
-			++npc->act_wait;
-			npc->rect = rc;
-
-			if (npc->act_wait / 2 % 2)
-				npc->rect.right = npc->rect.left;
-
-			if (npc->act_wait > 50)
-				npc->cond = 0;
-
+			npc->ym = 2 * 0x200;
+			npc->ani_no = 0;
+			npc->act_no = 1;
+			// Fallthough
+		case 1:
+			if (npc->flag & 8)
+			{
+				npc->ani_no = 1;
+				npc->ym = 0;
+				//npc->y += 8;
+				SetNpChar(4, npc->x + (Random(-12, 12) * 0x200), npc->y + (Random(-12, 12) * 0x200), Random(-341, 341), Random(-0x600, 0), 0, NULL, 0x100);
+				StartTextScript(40);
+			}
 			break;
 	}
 
-	if (npc->act_wait % 8 == 1)
-		SetCaret(npc->x + (Random(-8, 8) * 0x200), npc->y + 0x1000, CARET_TINY_PARTICLES, DIR_UP);
+	if (npc->direct == 0)
+		npc->rect = rcLeft[npc->ani_no];
+	else
+		npc->rect = rcRight[npc->ani_no];
+
+	if (npc->ym > 0x5FF)
+		npc->ym = 0x5FF;
+
+	npc->x += npc->xm;
+	npc->y += npc->ym;
 }
 
 // Misery (stood in the wind during the credits)

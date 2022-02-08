@@ -183,7 +183,7 @@ void DamageMyChar(int damage)
 		PlaySoundObject(17, SOUND_MODE_PLAY);
 		gMC.cond = 0;
 		SetDestroyNpChar(gMC.x, gMC.y, 10 * 0x200, 0x40);
-		StartTextScript(40);
+		SetNpChar(357, gMC.x, gMC.y, 0, 0, gMC.direct, NULL, 0x100);
 	}
 }
 

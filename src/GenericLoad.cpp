@@ -48,7 +48,7 @@ static const struct
 	{14, "PixTone/014.pxt", SOUND_TYPE_PIXTONE},
 	{15, "PixTone/015.pxt", SOUND_TYPE_PIXTONE},
 	{16, "PixTone/016.pxt", SOUND_TYPE_PIXTONE},
-	{17, "PixTone/017.pxt", SOUND_TYPE_PIXTONE},
+	{17, "Audio/death.ogg", SOUND_TYPE_OTHER}, 	  // Player death
 	{18, "PixTone/018.pxt", SOUND_TYPE_PIXTONE},
 	{20, "PixTone/020.pxt", SOUND_TYPE_PIXTONE},
 	{21, "PixTone/021.pxt", SOUND_TYPE_PIXTONE},
