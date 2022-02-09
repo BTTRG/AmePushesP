@@ -19,6 +19,7 @@
 #include "Sound.h"
 
 static int empty;
+BOOL energy_out;
 
 void ShootBullet_Frontia1(int level)
 {
@@ -516,6 +517,20 @@ void ShootBullet_Missile(int level, BOOL bSuper)
 			}
 			else if (gMC.down)
 			{
+				if (energy_out == FALSE)
+				{
+					if (gMC.ym > 0)
+						gMC.ym /= 2;
+
+					if (gMC.ym > -0x400 * 8)
+					{
+						gMC.ym -= 0x200 * 8;
+						if (gMC.ym < -0x400 * 8)
+							gMC.ym = -0x400 * 8;
+						energy_out = TRUE;
+					}
+				}
+
 				if (gMC.direct == 0)
 				{
 					SetBullet(bul_no, gMC.x - (1 * 0x200), gMC.y + (8 * 0x200), 3);

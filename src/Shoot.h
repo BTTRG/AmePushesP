@@ -7,5 +7,9 @@
 
 #pragma once
 
+#include "WindowsWrapper.h"
+
 void ResetSpurCharge(void);
 void ShootBullet(void);
+
+extern BOOL energy_out;

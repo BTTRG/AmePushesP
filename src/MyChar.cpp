@@ -25,6 +25,7 @@
 #include "Star.h"
 #include "TextScr.h"
 #include "ValueView.h"
+#include "Shoot.h"
 
 MYCHAR gMC;
 
@@ -107,6 +108,8 @@ void AnimationMyChar(BOOL bKey)
 
 	if (gMC.flag & 8)
 	{
+		energy_out = FALSE;
+		
 		if (gMC.cond & 1)
 		{
 			gMC.ani_no = 11;
