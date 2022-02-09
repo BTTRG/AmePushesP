@@ -118,6 +118,7 @@ static const struct
 	{117, "PixTone/117.pxt", SOUND_TYPE_PIXTONE},
 	{118, "Video/Video.ogg", SOUND_TYPE_OTHER},    // Video audio
 	{119, "Audio/Vineboom.ogg", SOUND_TYPE_OTHER}, // Vineboom
+	{120, "Audio/chomp.ogg", SOUND_TYPE_OTHER},    // Chomp
 	{150, "PixTone/150.pxt", SOUND_TYPE_PIXTONE},
 	{151, "PixTone/151.pxt", SOUND_TYPE_PIXTONE},
 	{152, "PixTone/152.pxt", SOUND_TYPE_PIXTONE},
