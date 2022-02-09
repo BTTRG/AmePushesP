@@ -29,6 +29,9 @@ Health restored.<NOD<CLO<RMU<FAI0004<END
 <MSG
 Health refilled.<NOD<END
 
+#0021
+<PRI<SOU0004<AE+<MSGAmmo refilled.<NOD<END
+
 #0030
 <PRI<FLJ0202:0032<FLJ0201:0031<FL+0201<GIT0005<AM+0005:0010
 <CMU0010Got the =Missile Launcher=!<WAI0160<NOD<RMU<CLRThe Missile Launcher is a powerful

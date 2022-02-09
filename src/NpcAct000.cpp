@@ -660,97 +660,78 @@ void ActNpc006(NPCHAR *npc)
 		npc->rect = rcRight[npc->ani_no];
 }
 
-// Basil
+// Ammo Refill
 void ActNpc007(NPCHAR *npc)
 {
-	RECT rcLeft[3] = {
-		{256, 64, 288,  80},
-		{256, 80, 288,  96},
-		{256, 96, 288, 112},
+	RECT rect[2] = {
+		{32, 64, 48, 80},
+		{48, 64, 64, 80},
 	};
 
-	RECT rcRight[3] = {
-		{288, 64, 320,  80},
-		{288, 80, 320,  96},
-		{288, 96, 320, 112},
-	};
+	int a;
 
 	switch (npc->act_no)
 	{
 		case 0:
-			npc->x = gMC.x; // Spawn beneath player
+			npc->act_no = 1;
 
-			if (npc->direct == 0)
-				npc->act_no = 1;
+			if (npc->direct == 2)
+			{
+				npc->ym = -0x200;
+
+				for (a = 0; a < 4; ++a)
+					SetNpChar(4, npc->x + (Random(-12, 12) * 0x200), npc->y + (Random(-12, 12) * 0x200), Random(-341, 341), Random(-0x600, 0), 0, NULL, 0x100);
+			}
+
+			// Fallthrough
+		case 1:
+			a = Random(0, 30);
+
+			if (a < 10)
+				npc->act_no = 2;
+			else if (a < 25)
+				npc->act_no = 3;
 			else
-				npc->act_no = 2;
+				npc->act_no = 4;
+
+			npc->act_wait = Random(0x10, 0x40);
+			npc->ani_wait = 0;
+			break;
+
+		case 2:
+			npc->rect = rect[0];
+
+			if (--npc->act_wait == 0)
+				npc->act_no = 1;
 
 			break;
 
-		case 1: // Going left
-			npc->xm -= 0x40;
+		case 3:
+			if (++npc->ani_wait % 2)
+				npc->rect = rect[0];
+			else
+				npc->rect = rect[1];
 
-			// Turn around if far enough away from the player
-			if (npc->x < gMC.x - (192 * 0x200))
-				npc->act_no = 2;
-
-			// Turn around if touching a wall
-			if (npc->flag & 1)
-			{
-				npc->xm = 0;
-				npc->act_no = 2;
-			}
+			if (--npc->act_wait == 0)
+				npc->act_no = 1;
 
 			break;
 
-		case 2: // Going right
-			npc->xm += 0x40;
+		case 4:
+			npc->rect = rect[1];
 
-			// Turn around if far enough away from the player
-			if (npc->x > gMC.x + (192 * 0x200))
+			if (--npc->act_wait == 0)
 				npc->act_no = 1;
-
-			// Turn around if touching a wall
-			if (npc->flag & 4)
-			{
-				npc->xm = 0;
-				npc->act_no = 1;
-			}
 
 			break;
 	}
 
-	// Face direction Bazil is moving
-	if (npc->xm < 0)
-		npc->direct = 0;
-	else
-		npc->direct = 2;
+	npc->ym += 0x40;
 
-	// Cap speed
-	if (npc->xm > 0x5FF)
-		npc->xm = 0x5FF;
-	if (npc->xm < -0x5FF)
-		npc->xm = -0x5FF;
+	if (npc->ym > 0x5FF)
+		npc->ym = 0x5FF;
 
-	// Apply momentum
-	npc->x += npc->xm;
-
-	// Increment animation
-	if (++npc->ani_wait > 1)
-	{
-		npc->ani_wait = 0;
-		++npc->ani_no;
-	}
-
-	// Loop animation
-	if (npc->ani_no > 2)
-		npc->ani_no = 0;
-
-	// Update sprite
-	if (npc->direct == 0)
-		npc->rect = rcLeft[npc->ani_no];
-	else
-		npc->rect = rcRight[npc->ani_no];
+	npc->y += npc->ym;
 }
 
 // Beetle (Follows you, Egg Corridor)
