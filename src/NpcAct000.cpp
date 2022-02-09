@@ -1603,71 +1603,10 @@ void ActNpc016(NPCHAR *npc)
 	npc->rect = rect[npc->ani_no];
 }
 
-// Health refill
+// Health refill (Catnip pot)
 void ActNpc017(NPCHAR *npc)
 {
-	RECT rect[2] = {
-		{288, 0, 304, 16},
-		{304, 0, 320, 16},
-	};
-
-	int a;
-
-	switch (npc->act_no)
-	{
-		case 0:
-			npc->act_no = 1;
-
-			if (npc->direct == 2)
-			{
-				npc->ym = -0x200;
-
-				for (a = 0; a < 4; ++a)
-					SetNpChar(4, npc->x + (Random(-12, 12) * 0x200), npc->y + (Random(-12, 12) * 0x200), Random(-341, 341), Random(-0x600, 0), 0, NULL, 0x100);
-			}
-
-			// Fallthrough
-		case 1:
-			a = Random(0, 30);
-
-			if (a < 10)
-				npc->act_no = 2;
-			else if (a < 25)
-				npc->act_no = 3;
-			else
-				npc->act_no = 4;
-
-			npc->act_wait = Random(0x10, 0x40);
-			npc->ani_wait = 0;
-			break;
-
-		case 2:
-			npc->rect = rect[0];
-
-			if (--npc->act_wait == 0)
-				npc->act_no = 1;
-
-			break;
-
-		case 3:
-			if (++npc->ani_wait % 2)
-				npc->rect = rect[0];
-			else
-				npc->rect = rect[1];
-
-			if (--npc->act_wait == 0)
-				npc->act_no = 1;
-
-			break;
-
-		case 4:
-			npc->rect = rect[1];
-
-			if (--npc->act_wait == 0)
-				npc->act_no = 1;
-
-			break;
-	}
+	RECT rect = {288, 0, 304, 16};
 
 	npc->ym += 0x40;
 
@@ -1675,6 +1614,7 @@ void ActNpc017(NPCHAR *npc)
 		npc->ym = 0x5FF;
 
 	npc->y += npc->ym;
+	npc->rect = rect;
 }
 
 // Door
