@@ -1599,85 +1599,103 @@ void ActNpc073(NPCHAR *npc)
 		npc->cond = 0;
 }
 
-// Jack
+// Hyper Soap
 void ActNpc074(NPCHAR *npc)
 {
-	RECT rcLeft[6] = {
-		{64, 0, 80, 16},
-		{80, 0, 96, 16},
-		{96, 0, 112, 16},
-		{64, 0, 80, 16},
-		{112, 0, 128, 16},
-		{64, 0, 80, 16},
+	// I'm so fucking lazyyyy
+	RECT rcLeft[5] = {
+		{40 + 64, 32, 56 + 64, 48},  // Walking 1
+		{56 + 64, 32, 72 + 64, 48},  // Walking 2
+		{40 + 64, 32, 56 + 64, 48},  // Walking 3 (copied from frame 1)
+		{72 + 64, 32, 88 + 64, 48},  // Walking 4
+		{88 + 64, 32, 104 + 64, 48}, // Jumping
 	};
 
-	RECT rcRight[6] = {
-		{64, 16, 80, 32},
-		{80, 16, 96, 32},
-		{96, 16, 112, 32},
-		{64, 16, 80, 32},
-		{112, 16, 128, 32},
-		{64, 16, 80, 32},
+	RECT rcRight[5] = {
+		{40 + 64, 48, 56 + 64, 64},  // Walking 1
+		{56 + 64, 48, 72 + 64, 64},  // Walking 2
+		{40 + 64, 48, 56 + 64, 64},  // Walking 3 (copied from frame 1)
+		{72 + 64, 48, 88 + 64, 64},  // Walking 4
+		{88 + 64, 48, 104 + 64, 64}, // Jumping
 	};
-
+	
 	switch (npc->act_no)
 	{
 		case 0:
-			npc->act_no = 1;
 			npc->ani_no = 0;
 			npc->ani_wait = 0;
-			npc->xm = 0;
+			npc->act_no = 1;
 			// Fallthrough
 		case 1:
-			if (Random(0, 120) == 10)
+			if (npc->flag & 4) // Touching a right wall
 			{
-				npc->act_no = 2;
-				npc->act_wait = 0;
-				npc->ani_no = 1;
+				npc->direct = 0;
 			}
+			if (npc->flag & 1) // Touching a left wall
+			{
+				npc->direct = 2;
+			}
+			if (npc->direct == 0) // Walking
+			{
+				//if (npc->flag & 0x64)
+					//npc->xm = -0.65 / 2 * 0x200;
+				//else
+					npc->xm = -0.65 * 0x400;
+			}
+			if (npc->direct == 2)
+			{
+				npc->xm = 0.65 * 0x400;
+			}
+			if (npc->flag & 8)
+			{
+				npc->ani_wait++;
+				if (npc->ani_wait > 2)
+				{
+					npc->ani_wait = 0;
+					npc->ani_no++;
 
+					if (npc->ani_no >= 2)
+					{
+						npc->ani_no = 0;
+					}
+
+				}
+			}
+			/*else
+			{
+				npc->ani_no = 4;
+			}*/
+			if (Random(0, 120) == 10 && npc->flag & 8) // Jump randomly if touching floor
+			{
+				npc->ym -= 0x5FF;
+				npc->act_no = 2; // Next state
+			}
+			if (Random(0, 100) == 10 && npc->flag & 8)
+			{
+				npc->ym = 0;
+				npc->xm = 0;
+				npc->ani_no = 0;
+				npc->act_no = 3; // Next state
+			}
 			break;
 
 		case 2:
-			if (++npc->act_wait > 8)
+			npc->ani_no = 4; // Set frame to jumping frame
+			npc->ani_wait = 0; // Reset animation timer
+
+			if (npc->flag & 8) // If touching floor, reset
 			{
 				npc->act_no = 1;
-				npc->ani_no = 0;
 			}
-
-			break;
-
-		case 8:
-			npc->act_no = 9;
-			npc->ani_no = 2;
-			npc->ani_wait = 0;
-			// Fallthrough
-		case 9:
-			if (++npc->ani_wait > 4)
+		case 3:
+			if (Random(0, 100) == 10 && npc->flag & 8) // Return to walking state
 			{
-				npc->ani_wait = 0;
-				++npc->ani_no;
+				npc->act_no = 1; // Next state
 			}
-
-			if (npc->ani_no > 5)
-				npc->ani_no = 2;
-
-			if (npc->direct == 0)
-				npc->xm = -0x200;
-			else
-				npc->xm = 0x200;
-
-			break;
 	}
 
-	npc->ym += 0x40;
-
-	if (npc->xm > 0x400)
-		npc->xm = 0x400;
-	if (npc->xm < -0x400)
-		npc->xm = -0x400;
-
-	if (npc->ym > 0x5FF)
+	npc->ym += 0x40; // Gravity
+	if (npc->ym > 0x5FF) // Terminal velocity
 		npc->ym = 0x5FF;
 
 	npc->x += npc->xm;
@@ -1716,13 +1734,10 @@ void ActNpc075(NPCHAR *npc)
 	npc->rect = rcLeft[npc->ani_no];
 }
 
-// Flowers
+// 5G Network Tower
 void ActNpc076(NPCHAR *npc)
 {
-	npc->rect.left = npc->code_event * 16;
-	npc->rect.top = 0;
-	npc->rect.right = npc->rect.left + 16;
-	npc->rect.bottom = 16;
+	RECT rect = {0, 32, 32, 104};
 }
 
 // Yamashita
