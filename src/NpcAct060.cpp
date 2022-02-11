@@ -22,6 +22,7 @@
 #include "NpChar.h"
 #include "Sound.h"
 #include "Triangle.h"
+#include "Caret.h"
 
 // Toroko
 void ActNpc060(NPCHAR *npc)
@@ -1737,49 +1738,76 @@ void ActNpc075(NPCHAR *npc)
 // 5G Network Tower
 void ActNpc076(NPCHAR *npc)
 {
-	RECT rect = {0, 32, 32, 104};
+	RECT rect = {168, 0, 232, 96};
+
+	unsigned char deg;
+	int xm, ym;
+
+	switch (npc->act_no)
+	{
+		case 0:
+			if (Random(0, 100) == 10)
+			{
+				deg = GetArktan(npc->x - gMC.x, npc->y + (4 * 0x200) - gMC.y);
+				ym = GetSin(deg);
+				xm = GetCos(deg);
+				SetNpChar(77, npc->x + (4 * 0x200), npc->y + (4 * 0x200), xm, ym, 0, NULL, 0x100);
+			}
+	}
+
+	npc->rect = rect;
 }
 
-// Yamashita
+// 5G Projectile
 void ActNpc077(NPCHAR *npc)
 {
-	RECT rc[3] = {
-		{0, 16, 48, 48},
-		{48, 16, 96, 48},
-		{96, 16, 144, 48},
+	if (npc->flag & 0xFF)
+	{
+		npc->cond = 0;
+		SetCaret(npc->x, npc->y, CARET_PROJECTILE_DISSIPATION, DIR_LEFT);
+	}
+
+	npc->y += npc->ym;
+	npc->x += npc->xm;
+
+	RECT rcLeft[2] = {
+		{0, 40, 16, 56},
+		{0, 56, 16, 72},
+	};
+
+	RECT rcRight[2] = {
+		{16, 40, 32, 56},
+		{16, 56, 32, 72},
 	};
 
 	switch (npc->act_no)
 	{
 		case 0:
-			npc->act_no = 1;
 			npc->ani_no = 0;
-			npc->ani_wait = 0;
+			npc->act_no = 1;
+
+			if (gMC.x > npc->x)
+				npc->direct = 2;
+			else
+				npc->direct = 0;
 			// Fallthrough
 		case 1:
-			if (Random(0, 120) == 10)
-			{
-				npc->act_no = 2;
-				npc->act_wait = 0;
+			if (npc->ym > 0)
 				npc->ani_no = 1;
-			}
-
-			break;
-
-		case 2:
-			if (++npc->act_wait > 8)
-			{
-				npc->act_no = 1;
+			else
 				npc->ani_no = 0;
-			}
-
-			break;
 	}
 
 	if (npc->direct == 0)
-		npc->rect = rc[npc->ani_no];
+		npc->rect = rcLeft[npc->ani_no];
 	else
-		npc->rect = rc[2];
+		npc->rect = rcRight[npc->ani_no];
+
+	if (++npc->count1 > 255)
+	{
+		SetCaret(npc->x, npc->y, CARET_PROJECTILE_DISSIPATION, DIR_LEFT);
+		npc->cond = 0;
+	}
 }
 
 // Pot

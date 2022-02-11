@@ -235,7 +235,7 @@ void ActNpc002(NPCHAR *npc)
 		{72, 48, 88, 64},  // Walking 4
 		{88, 48, 104, 64}, // Jumping
 	};
-	
+
 	switch (npc->act_no)
 	{
 		case 0:
