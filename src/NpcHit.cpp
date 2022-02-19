@@ -497,9 +497,9 @@ void LoseNpChar(NPCHAR *npc, BOOL bVanish)
 			case 1:
 				// Spawn health
 				if (npc->exp > 6)
-					val = 6;
-				else
 					val = 2;
+				else
+					val = 1;
 
 				SetLifeObject(npc->x, npc->y, val);
 

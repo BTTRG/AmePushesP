@@ -850,9 +850,6 @@ void ActNpc087(NPCHAR *npc)
 
 		if (npc->flag & 8)
 			npc->ym = -0x40;
-
-		npc->x += npc->xm;
-		npc->y += npc->ym;
 	}
 
 	switch (npc->exp)
@@ -863,6 +860,7 @@ void ActNpc087(NPCHAR *npc)
 
 		case 6:
 			npc->rect = rect6[npc->ani_no];
+			npc->hit.bottom = 8 * 0x200;
 			break;
 	}
 
@@ -877,6 +875,12 @@ void ActNpc087(NPCHAR *npc)
 
 	if (npc->count1 > 547)
 		npc->rect = rcLast;
+
+	npc->x += npc->xm;
+	npc->y += npc->ym;
+
+	if (npc->ym < 0x200)
+		npc->ym += 0x40;
 }
 
 // Igor (boss)
