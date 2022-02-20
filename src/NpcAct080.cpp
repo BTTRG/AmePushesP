@@ -854,11 +854,11 @@ void ActNpc087(NPCHAR *npc)
 
 	switch (npc->exp)
 	{
-		case 2:
+		case 1:
 			npc->rect = rect2[npc->ani_no];
 			break;
 
-		case 6:
+		case 2:
 			npc->rect = rect6[npc->ani_no];
 			npc->hit.bottom = 8 * 0x200;
 			break;
@@ -879,8 +879,14 @@ void ActNpc087(NPCHAR *npc)
 	npc->x += npc->xm;
 	npc->y += npc->ym;
 
-	if (npc->ym < 0x200)
-		npc->ym += 0x40;
+	// Gravity
+	if (npc->flag & 0x100)
+		npc->ym += 0x15;
+	else
+		npc->ym += 0x2A;
+
+	if (npc->ym > 0x5FF)
+		npc->ym = 0x5FF;
 }
 
 // Igor (boss)
