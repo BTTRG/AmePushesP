@@ -198,7 +198,7 @@ void ActNpc042(NPCHAR *npc)
 				++npc->ani_no;
 			}
 
-			if (npc->ani_no > 5)
+			if (npc->ani_no > 3)
 				npc->ani_no = 2;
 
 			if (npc->direct == 0)
