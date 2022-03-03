@@ -1235,7 +1235,7 @@ void ActNpc348(NPCHAR *npc)
 	npc->rect = rc[npc->ani_no];
 }
 
-// Statue
+// Totally useless NPC
 void ActNpc349(NPCHAR *npc)
 {
 	RECT rect = {0, 0, 16, 16};
@@ -1244,8 +1244,6 @@ void ActNpc349(NPCHAR *npc)
 	{
 		npc->act_no = 1;
 
-		if (npc->direct == 0)
-			npc->x += 8 * 0x200;
 		if (npc->direct == 2)
 			npc->y += 16 * 0x200;
 	}

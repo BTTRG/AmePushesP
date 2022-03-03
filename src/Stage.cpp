@@ -331,7 +331,7 @@ static const MusicListEntry music_table_organya[42] = {
 	{"Resource/ORG/Weed.org", NULL, MUSIC_TYPE_ORGANYA, true},
 	{"Resource/ORG/MDown2.org", NULL, MUSIC_TYPE_ORGANYA, true},
 	{"Resource/ORG/FireEye.org", NULL, MUSIC_TYPE_ORGANYA, true},
-	{"Resource/ORG/Vivi.org", NULL, MUSIC_TYPE_ORGANYA, true},
+	{"Resource/ORG/Void.org", NULL, MUSIC_TYPE_ORGANYA, true},
 	{"Resource/ORG/Mura.org", NULL, MUSIC_TYPE_ORGANYA, true},
 	{"Resource/ORG/Fanfale1.org", NULL, MUSIC_TYPE_ORGANYA, false},
 	{"Resource/ORG/Ginsuke.org", NULL, MUSIC_TYPE_ORGANYA, true},
