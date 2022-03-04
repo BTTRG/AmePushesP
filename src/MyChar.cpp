@@ -852,9 +852,9 @@ void AirProcess(void)
 					StartTextScript(41);
 
 					if (gMC.direct == 0)
-						SetCaret(gMC.x, gMC.y, CARET_DROWNED_QUOTE, DIR_LEFT);
+						SetCaret(gMC.x, gMC.y, CARET_DROWNED_AME, DIR_LEFT);
 					else
-						SetCaret(gMC.x, gMC.y, CARET_DROWNED_QUOTE, DIR_RIGHT);
+						SetCaret(gMC.x, gMC.y, CARET_DROWNED_AME, DIR_RIGHT);
 
 					gMC.cond &= ~0x80;
 				}

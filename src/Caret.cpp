@@ -54,7 +54,7 @@ CARET_TABLE gCaretTable[] = {
 	{ 4 * 0x200,  4 * 0x200}, // CARET_ZZZ
 	{ 8 * 0x200,  8 * 0x200}, // CARET_SNAKE_AFTERIMAGE_DUPLICATE
 	{ 4 * 0x200,  4 * 0x200}, // CARET_EXHAUST
-	{ 8 * 0x200,  8 * 0x200}, // CARET_DROWNED_QUOTE
+	{ 8 * 0x200, 16 * 0x200}, // CARET_DROWNED_AME
 	{ 8 * 0x200,  8 * 0x200}, // CARET_QUESTION_MARK
 	{28 * 0x200,  8 * 0x200}, // CARET_LEVEL_UP
 	{ 4 * 0x200,  4 * 0x200}, // CARET_HURT_PARTICLES
@@ -338,11 +338,11 @@ void ActCaret07(CARET *crt)
 	}
 }
 
-// Drowned Quote
+// Drowned Ame
 void ActCaret08(CARET *crt)
 {
-	RECT rcLeft = {16, 80, 32, 96};
-	RECT rcRight = {32, 80, 48, 96};
+	RECT rcLeft = {128, 120, 144, 144};
+	RECT rcRight = {144, 120, 160, 144};
 
 	if (crt->direct == DIR_LEFT)
 		crt->rect = rcLeft;
