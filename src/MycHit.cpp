@@ -529,42 +529,42 @@ void HitMyCharMap(void)
 			// Water slopes
 			case 0x70:
 				gMC.flag |= JudgeHitMyCharTriangleA(x + offx[i], y + offy[i]);
-				gMC.flag |= JudgeHitMyCharWater(x + offx[i], y + offy[i]);
+				gMC.flag |= JudgeHitMyCharWater(x + offx[i], y + offy[i] + 8);
 				break;
 
 			case 0x71:
 				gMC.flag |= JudgeHitMyCharTriangleB(x + offx[i], y + offy[i]);
-				gMC.flag |= JudgeHitMyCharWater(x + offx[i], y + offy[i]);
+				gMC.flag |= JudgeHitMyCharWater(x + offx[i], y + offy[i] + 8);
 				break;
 
 			case 0x72:
 				gMC.flag |= JudgeHitMyCharTriangleC(x + offx[i], y + offy[i]);
-				gMC.flag |= JudgeHitMyCharWater(x + offx[i], y + offy[i]);
+				gMC.flag |= JudgeHitMyCharWater(x + offx[i], y + offy[i] + 8);
 				break;
 
 			case 0x73:
 				gMC.flag |= JudgeHitMyCharTriangleD(x + offx[i], y + offy[i]);
-				gMC.flag |= JudgeHitMyCharWater(x + offx[i], y + offy[i]);
+				gMC.flag |= JudgeHitMyCharWater(x + offx[i], y + offy[i] + 8);
 				break;
 
 			case 0x74:
 				gMC.flag |= JudgeHitMyCharTriangleE(x + offx[i], y + offy[i]);
-				gMC.flag |= JudgeHitMyCharWater(x + offx[i], y + offy[i]);
+				gMC.flag |= JudgeHitMyCharWater(x + offx[i], y + offy[i] + 8);
 				break;
 
 			case 0x75:
 				gMC.flag |= JudgeHitMyCharTriangleF(x + offx[i], y + offy[i]);
-				gMC.flag |= JudgeHitMyCharWater(x + offx[i], y + offy[i]);
+				gMC.flag |= JudgeHitMyCharWater(x + offx[i], y + offy[i] + 8);
 				break;
 
 			case 0x76:
 				gMC.flag |= JudgeHitMyCharTriangleG(x + offx[i], y + offy[i]);
-				gMC.flag |= JudgeHitMyCharWater(x + offx[i], y + offy[i]);
+				gMC.flag |= JudgeHitMyCharWater(x + offx[i], y + offy[i] + 8);
 				break;
 
 			case 0x77:
 				gMC.flag |= JudgeHitMyCharTriangleH(x + offx[i], y + offy[i]);
-				gMC.flag |= JudgeHitMyCharWater(x + offx[i], y + offy[i]);
+				gMC.flag |= JudgeHitMyCharWater(x + offx[i], y + offy[i] + 8);
 				break;
 
 			// Water current
