@@ -17,6 +17,7 @@
 #include "MyChar.h"
 #include "MycParam.h"
 #include "Sound.h"
+#include "Game.h"
 
 static int empty;
 BOOL energy_out;
@@ -702,6 +703,8 @@ void ShootBullet_Bubblin1(void)
 void ShootBullet_Bubblin2(int level)
 {
 	static int wait;
+	int rand;
+	rand = Random(6, 32);
 
 	if (CountArmsBullet(7) > 15)
 		return;
@@ -709,11 +712,11 @@ void ShootBullet_Bubblin2(int level)
 	level += 18;
 
 	if (!(gKey & gKeyShot))
-		gMC.rensha = 6;
+		gMC.rensha = rand;
 
 	if (gKey & gKeyShot)
 	{
-		if (++gMC.rensha < 7)
+		if (++gMC.rensha < rand)
 			return;
 
 		gMC.rensha = 0;
