@@ -1924,6 +1924,13 @@ void ActNpc357(NPCHAR *npc)
 			break;
 	}
 
+	// In case we can't land on ground
+	if (!(npc->flag & 8) && ++npc->act_wait > 255)
+	{
+		StartTextScript(40);
+		npc->cond = 0;
+	}
+
 	if (npc->direct == 0)
 		npc->rect = rcLeft[npc->ani_no];
 	else
